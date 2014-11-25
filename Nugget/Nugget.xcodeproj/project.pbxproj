@@ -1,0 +1,395 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DCC04FEB1A2430D200C3524F /* Nugget.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DCC04FEA1A2430D200C3524F /* Nugget.h */; };
+		DCC04FED1A2430D200C3524F /* Nugget.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC04FEC1A2430D200C3524F /* Nugget.m */; };
+		DCC04FF31A2430D200C3524F /* libNugget.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC04FE71A2430D200C3524F /* libNugget.a */; };
+		DCC050031A2430FA00C3524F /* NugCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC050021A2430FA00C3524F /* NugCollection.m */; };
+		DCC050051A24319900C3524F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC050041A24319900C3524F /* UIKit.framework */; };
+		DCC050081A24341000C3524F /* NugCollectionUpdates.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC050071A24341000C3524F /* NugCollectionUpdates.m */; };
+		DCC0500A1A24342A00C3524F /* NugCollectionUpdatesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC050091A24342A00C3524F /* NugCollectionUpdatesTests.m */; };
+		DCC0500B1A24386300C3524F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC050041A24319900C3524F /* UIKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DCC04FF41A2430D200C3524F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCC04FDF1A2430D200C3524F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCC04FE61A2430D200C3524F;
+			remoteInfo = Nugget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DCC04FE51A2430D200C3524F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				DCC04FEB1A2430D200C3524F /* Nugget.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DCC04FE71A2430D200C3524F /* libNugget.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNugget.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCC04FEA1A2430D200C3524F /* Nugget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nugget.h; sourceTree = "<group>"; };
+		DCC04FEC1A2430D200C3524F /* Nugget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Nugget.m; sourceTree = "<group>"; };
+		DCC04FF21A2430D200C3524F /* NuggetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NuggetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCC04FF81A2430D200C3524F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCC050011A2430FA00C3524F /* NugCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NugCollection.h; sourceTree = "<group>"; };
+		DCC050021A2430FA00C3524F /* NugCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NugCollection.m; sourceTree = "<group>"; };
+		DCC050041A24319900C3524F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DCC050061A24341000C3524F /* NugCollectionUpdates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NugCollectionUpdates.h; sourceTree = "<group>"; };
+		DCC050071A24341000C3524F /* NugCollectionUpdates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NugCollectionUpdates.m; sourceTree = "<group>"; };
+		DCC050091A24342A00C3524F /* NugCollectionUpdatesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NugCollectionUpdatesTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DCC04FE41A2430D200C3524F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCC050051A24319900C3524F /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCC04FEF1A2430D200C3524F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCC0500B1A24386300C3524F /* UIKit.framework in Frameworks */,
+				DCC04FF31A2430D200C3524F /* libNugget.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DCC04FDE1A2430D200C3524F = {
+			isa = PBXGroup;
+			children = (
+				DCC050041A24319900C3524F /* UIKit.framework */,
+				DCC04FE91A2430D200C3524F /* Nugget */,
+				DCC04FF61A2430D200C3524F /* NuggetTests */,
+				DCC04FE81A2430D200C3524F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DCC04FE81A2430D200C3524F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCC04FE71A2430D200C3524F /* libNugget.a */,
+				DCC04FF21A2430D200C3524F /* NuggetTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCC04FE91A2430D200C3524F /* Nugget */ = {
+			isa = PBXGroup;
+			children = (
+				DCC04FEA1A2430D200C3524F /* Nugget.h */,
+				DCC04FEC1A2430D200C3524F /* Nugget.m */,
+				DCC050011A2430FA00C3524F /* NugCollection.h */,
+				DCC050021A2430FA00C3524F /* NugCollection.m */,
+				DCC050061A24341000C3524F /* NugCollectionUpdates.h */,
+				DCC050071A24341000C3524F /* NugCollectionUpdates.m */,
+			);
+			path = Nugget;
+			sourceTree = "<group>";
+		};
+		DCC04FF61A2430D200C3524F /* NuggetTests */ = {
+			isa = PBXGroup;
+			children = (
+				DCC04FF71A2430D200C3524F /* Supporting Files */,
+				DCC050091A24342A00C3524F /* NugCollectionUpdatesTests.m */,
+			);
+			path = NuggetTests;
+			sourceTree = "<group>";
+		};
+		DCC04FF71A2430D200C3524F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DCC04FF81A2430D200C3524F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DCC04FE61A2430D200C3524F /* Nugget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCC04FFB1A2430D200C3524F /* Build configuration list for PBXNativeTarget "Nugget" */;
+			buildPhases = (
+				DCC04FE31A2430D200C3524F /* Sources */,
+				DCC04FE41A2430D200C3524F /* Frameworks */,
+				DCC04FE51A2430D200C3524F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Nugget;
+			productName = Nugget;
+			productReference = DCC04FE71A2430D200C3524F /* libNugget.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DCC04FF11A2430D200C3524F /* NuggetTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCC04FFE1A2430D200C3524F /* Build configuration list for PBXNativeTarget "NuggetTests" */;
+			buildPhases = (
+				DCC04FEE1A2430D200C3524F /* Sources */,
+				DCC04FEF1A2430D200C3524F /* Frameworks */,
+				DCC04FF01A2430D200C3524F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCC04FF51A2430D200C3524F /* PBXTargetDependency */,
+			);
+			name = NuggetTests;
+			productName = NuggetTests;
+			productReference = DCC04FF21A2430D200C3524F /* NuggetTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DCC04FDF1A2430D200C3524F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Nugget;
+				TargetAttributes = {
+					DCC04FE61A2430D200C3524F = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					DCC04FF11A2430D200C3524F = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
+			};
+			buildConfigurationList = DCC04FE21A2430D200C3524F /* Build configuration list for PBXProject "Nugget" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DCC04FDE1A2430D200C3524F;
+			productRefGroup = DCC04FE81A2430D200C3524F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DCC04FE61A2430D200C3524F /* Nugget */,
+				DCC04FF11A2430D200C3524F /* NuggetTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DCC04FF01A2430D200C3524F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DCC04FE31A2430D200C3524F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCC050081A24341000C3524F /* NugCollectionUpdates.m in Sources */,
+				DCC050031A2430FA00C3524F /* NugCollection.m in Sources */,
+				DCC04FED1A2430D200C3524F /* Nugget.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCC04FEE1A2430D200C3524F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCC0500A1A24342A00C3524F /* NugCollectionUpdatesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DCC04FF51A2430D200C3524F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCC04FE61A2430D200C3524F /* Nugget */;
+			targetProxy = DCC04FF41A2430D200C3524F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		DCC04FF91A2430D200C3524F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DCC04FFA1A2430D200C3524F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DCC04FFC1A2430D200C3524F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DCC04FFD1A2430D200C3524F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		DCC04FFF1A2430D200C3524F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NuggetTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "61389af4-e336-4772-adda-b8253eba9114";
+			};
+			name = Debug;
+		};
+		DCC050001A2430D200C3524F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NuggetTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "61389af4-e336-4772-adda-b8253eba9114";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DCC04FE21A2430D200C3524F /* Build configuration list for PBXProject "Nugget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCC04FF91A2430D200C3524F /* Debug */,
+				DCC04FFA1A2430D200C3524F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCC04FFB1A2430D200C3524F /* Build configuration list for PBXNativeTarget "Nugget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCC04FFC1A2430D200C3524F /* Debug */,
+				DCC04FFD1A2430D200C3524F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DCC04FFE1A2430D200C3524F /* Build configuration list for PBXNativeTarget "NuggetTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCC04FFF1A2430D200C3524F /* Debug */,
+				DCC050001A2430D200C3524F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DCC04FDF1A2430D200C3524F /* Project object */;
+}
