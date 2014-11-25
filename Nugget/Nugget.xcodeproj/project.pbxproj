@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		DCC04FEB1A2430D200C3524F /* Nugget.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DCC04FEA1A2430D200C3524F /* Nugget.h */; };
-		DCC04FED1A2430D200C3524F /* Nugget.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC04FEC1A2430D200C3524F /* Nugget.m */; };
 		DCC04FF31A2430D200C3524F /* libNugget.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC04FE71A2430D200C3524F /* libNugget.a */; };
 		DCC050031A2430FA00C3524F /* NugCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC050021A2430FA00C3524F /* NugCollection.m */; };
 		DCC050051A24319900C3524F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC050041A24319900C3524F /* UIKit.framework */; };
@@ -43,7 +42,6 @@
 /* Begin PBXFileReference section */
 		DCC04FE71A2430D200C3524F /* libNugget.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNugget.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC04FEA1A2430D200C3524F /* Nugget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nugget.h; sourceTree = "<group>"; };
-		DCC04FEC1A2430D200C3524F /* Nugget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Nugget.m; sourceTree = "<group>"; };
 		DCC04FF21A2430D200C3524F /* NuggetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NuggetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC04FF81A2430D200C3524F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCC050011A2430FA00C3524F /* NugCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NugCollection.h; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				DCC04FEA1A2430D200C3524F /* Nugget.h */,
-				DCC04FEC1A2430D200C3524F /* Nugget.m */,
 				DCC050011A2430FA00C3524F /* NugCollection.h */,
 				DCC050021A2430FA00C3524F /* NugCollection.m */,
 				DCC050061A24341000C3524F /* NugCollectionUpdates.h */,
@@ -214,7 +211,6 @@
 			files = (
 				DCC050081A24341000C3524F /* NugCollectionUpdates.m in Sources */,
 				DCC050031A2430FA00C3524F /* NugCollection.m in Sources */,
-				DCC04FED1A2430D200C3524F /* Nugget.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
