@@ -14,6 +14,8 @@
 		DCC050081A24341000C3524F /* NugCollectionUpdates.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC050071A24341000C3524F /* NugCollectionUpdates.m */; };
 		DCC0500A1A24342A00C3524F /* NugCollectionUpdatesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC050091A24342A00C3524F /* NugCollectionUpdatesTests.m */; };
 		DCC0500B1A24386300C3524F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC050041A24319900C3524F /* UIKit.framework */; };
+		DCC0506D1A2C56D100C3524F /* NugEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC0506C1A2C56D100C3524F /* NugEvent.m */; };
+		DCC050721A2C575600C3524F /* NugWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC050701A2C575600C3524F /* NugWeakProxy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,11 @@
 		DCC050061A24341000C3524F /* NugCollectionUpdates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NugCollectionUpdates.h; sourceTree = "<group>"; };
 		DCC050071A24341000C3524F /* NugCollectionUpdates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NugCollectionUpdates.m; sourceTree = "<group>"; };
 		DCC050091A24342A00C3524F /* NugCollectionUpdatesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NugCollectionUpdatesTests.m; sourceTree = "<group>"; };
+		DCC0506B1A2C56D100C3524F /* NugEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NugEvent.h; sourceTree = "<group>"; };
+		DCC0506C1A2C56D100C3524F /* NugEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NugEvent.m; sourceTree = "<group>"; };
+		DCC0506F1A2C575600C3524F /* NugWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NugWeakProxy.h; sourceTree = "<group>"; };
+		DCC050701A2C575600C3524F /* NugWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NugWeakProxy.m; sourceTree = "<group>"; };
+		DCC050711A2C575600C3524F /* NugWeakProxySubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NugWeakProxySubclass.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +102,8 @@
 		DCC04FE91A2430D200C3524F /* Nugget */ = {
 			isa = PBXGroup;
 			children = (
+				DCC0506E1A2C572700C3524F /* proxy */,
+				DCC0506A1A2C56A700C3524F /* event */,
 				DCC04FEA1A2430D200C3524F /* Nugget.h */,
 				DCC050011A2430FA00C3524F /* NugCollection.h */,
 				DCC050021A2430FA00C3524F /* NugCollection.m */,
@@ -119,6 +128,25 @@
 				DCC04FF81A2430D200C3524F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DCC0506A1A2C56A700C3524F /* event */ = {
+			isa = PBXGroup;
+			children = (
+				DCC0506B1A2C56D100C3524F /* NugEvent.h */,
+				DCC0506C1A2C56D100C3524F /* NugEvent.m */,
+			);
+			path = event;
+			sourceTree = "<group>";
+		};
+		DCC0506E1A2C572700C3524F /* proxy */ = {
+			isa = PBXGroup;
+			children = (
+				DCC0506F1A2C575600C3524F /* NugWeakProxy.h */,
+				DCC050701A2C575600C3524F /* NugWeakProxy.m */,
+				DCC050711A2C575600C3524F /* NugWeakProxySubclass.h */,
+			);
+			path = proxy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +237,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCC050721A2C575600C3524F /* NugWeakProxy.m in Sources */,
+				DCC0506D1A2C56D100C3524F /* NugEvent.m in Sources */,
 				DCC050081A24341000C3524F /* NugCollectionUpdates.m in Sources */,
 				DCC050031A2430FA00C3524F /* NugCollection.m in Sources */,
 			);
@@ -376,6 +406,7 @@
 				DCC04FFD1A2430D200C3524F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DCC04FFE1A2430D200C3524F /* Build configuration list for PBXNativeTarget "NuggetTests" */ = {
 			isa = XCConfigurationList;
@@ -384,6 +415,7 @@
 				DCC050001A2430D200C3524F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
