@@ -10,6 +10,8 @@
 #import "NugWeakProxy.h"
 #import "NugWeakProxySubclass.h"
 
+NSString * NugEventInfoKey = @"event_info";
+
 #pragma mark - NugEventSubscriberProxy
 @class NugEventSubscriberProxy;
 @protocol NugEventSubscriberProxyDelegate
@@ -389,15 +391,20 @@
 }
 
 #pragma mark Publishing
+- (NSDictionary *)notificationUserInfo:(id)data
+{
+  if (!data) return @{};
+  return @{ NugEventInfoKey : data };
+}
 - (void)publish:(NSString *)name sender:(id)sender userInfo:(id)userInfo
 {
-  NSNotification * notification = [[NSNotification alloc] initWithName:name object:sender userInfo:userInfo];
+  NSNotification * notification = [[NSNotification alloc] initWithName:name object:sender userInfo:[self notificationUserInfo:userInfo]];
   [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 - (void)publishEventually:(NSString *)name sender:(id)sender userInfo:(id)userInfo
 {
-  NSNotification * notification = [[NSNotification alloc] initWithName:name object:sender userInfo:userInfo];
+  NSNotification * notification = [[NSNotification alloc] initWithName:name object:sender userInfo:[self notificationUserInfo:userInfo]];
   [[NSNotificationQueue defaultQueue] enqueueNotification:notification
                                              postingStyle:NSPostASAP
                                              coalesceMask:NSNotificationCoalescingOnName|NSNotificationCoalescingOnSender

@@ -15,6 +15,8 @@ typedef NS_ENUM(uint32_t, NugEventThread) {
   NugEventThreadUserDefined
 };
 
+extern NSString * NugEventInfoKey;
+
 /**
  *
  * High level API for publishing/subscribing notification.
