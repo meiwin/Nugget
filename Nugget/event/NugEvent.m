@@ -22,10 +22,11 @@ NSString * NugEventInfoKey = @"event_info";
 
 @interface NugEventSubscriberProxy : NugWeakProxy
 @property (nonatomic, strong, readonly) NSString * identifier;
+@property (nonatomic, strong, readonly) NSString * name;
 @property (nonatomic, weak) id<NugEventSubscriberProxyDelegate> delegate;
 @property (nonatomic, readonly) SEL selector;
 @property (nonatomic, strong, readonly) NSThread * targetThread;
-+ (instancetype)eventSubscriberWithTarget:(id)target selector:(SEL)selector targetThread:(NSThread *)targetThread;
++ (instancetype)eventSubscriberWithTarget:(id)target selector:(SEL)selector targetThread:(NSThread *)targetThread name:(NSString *)name;
 - (void)invoke:(NSNotification *)notification;
 - (void)processNotifications;
 @end
@@ -46,12 +47,13 @@ NSString * NugEventInfoKey = @"event_info";
 @end
 
 @implementation NugEventSubscriberProxy
-+ (instancetype)eventSubscriberWithTarget:(id)target selector:(SEL)selector targetThread:(NSThread *)targetThread
++ (instancetype)eventSubscriberWithTarget:(id)target selector:(SEL)selector targetThread:(NSThread *)targetThread name:(NSString *)name
 {
   NugEventSubscriberProxy * proxy = [[NugEventSubscriberProxy alloc] init];
   [proxy setTarget:target];
   proxy.selector = selector;
   proxy.targetThread = targetThread;
+  proxy.name = name;
   return proxy;
 }
 - (id)init
@@ -128,6 +130,10 @@ NSString * NugEventInfoKey = @"event_info";
 - (void)setTargetThread:(id)targetThread
 {
   _targetThread = targetThread;
+}
+- (void)setName:(NSString *)name
+{
+  _name = name;
 }
 #pragma mark Delegate
 - (void)setDelegate:(id<NugEventSubscriberProxyDelegate>)delegate
@@ -381,7 +387,7 @@ NSString * NugEventInfoKey = @"event_info";
     NSAssert1(NO, @"Invalid event thread: %d", thread);
   }
 
-  NugEventSubscriberProxy * proxy = [NugEventSubscriberProxy eventSubscriberWithTarget:target selector:selector targetThread:threadObject];
+  NugEventSubscriberProxy * proxy = [NugEventSubscriberProxy eventSubscriberWithTarget:target selector:selector targetThread:threadObject name:name];
   proxy.delegate = proxyDelegate;
   [[NSNotificationCenter defaultCenter] addObserver:proxy selector:@selector(invoke:) name:name object:object];
   
@@ -438,7 +444,20 @@ NSString * NugEventInfoKey = @"event_info";
   [_proxies removeObjectsInArray:proxiesToRemove];
   [_lock unlock];
 }
-
+- (void)unsubscribe:(id)target name:(NSString *)name
+{
+  [_lock lock];
+  NSMutableArray * proxiesToRemove = [NSMutableArray array];
+  [_proxies enumerateObjectsUsingBlock:^(NugEventSubscriberProxy * proxy, NSUInteger idx, BOOL *stop) {
+    if (proxy.safeTarget == nil || (proxy.safeTarget == target && [proxy.name isEqual:name]))
+    {
+      [proxiesToRemove addObject:proxy];
+      [[NSNotificationCenter defaultCenter] removeObserver:proxy];
+    }
+  }];
+  [_proxies removeObjectsInArray:proxiesToRemove];
+  [_lock unlock];
+}
 #pragma mark EventSubscriberProxyDelegate
 - (void)eventSubscriberProxyDidBecomeInvalid:(NugEventSubscriberProxy *)proxy
 {

@@ -43,5 +43,6 @@ extern NSString * NugEventInfoKey;
 - (void)subscribe:(NSString *)name object:(id)object target:(id)target selector:(SEL)selector thread:(NugEventThread)thread;
 - (void)subscribe:(NSString *)name object:(id)object target:(id)target selector:(SEL)selector threadName:(NSString *)threadName;
 - (void)unsubscribe:(id)target;
+- (void)unsubscribe:(id)target name:(NSString *)name;
 
 @end
