@@ -16,6 +16,7 @@
 		DCC0500B1A24386300C3524F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC050041A24319900C3524F /* UIKit.framework */; };
 		DCC0506D1A2C56D100C3524F /* NugEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC0506C1A2C56D100C3524F /* NugEvent.m */; };
 		DCC050721A2C575600C3524F /* NugWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC050701A2C575600C3524F /* NugWeakProxy.m */; };
+		DCFF1B041A35A2610068D740 /* NugStack.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFF1B031A35A2610068D740 /* NugStack.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		DCC0506F1A2C575600C3524F /* NugWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NugWeakProxy.h; sourceTree = "<group>"; };
 		DCC050701A2C575600C3524F /* NugWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NugWeakProxy.m; sourceTree = "<group>"; };
 		DCC050711A2C575600C3524F /* NugWeakProxySubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NugWeakProxySubclass.h; sourceTree = "<group>"; };
+		DCFF1B021A35A2610068D740 /* NugStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NugStack.h; sourceTree = "<group>"; };
+		DCFF1B031A35A2610068D740 /* NugStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NugStack.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +105,7 @@
 		DCC04FE91A2430D200C3524F /* Nugget */ = {
 			isa = PBXGroup;
 			children = (
+				DCFF1B011A35A22B0068D740 /* data-structure */,
 				DCC0506E1A2C572700C3524F /* proxy */,
 				DCC0506A1A2C56A700C3524F /* event */,
 				DCC04FEA1A2430D200C3524F /* Nugget.h */,
@@ -147,6 +151,15 @@
 				DCC050711A2C575600C3524F /* NugWeakProxySubclass.h */,
 			);
 			path = proxy;
+			sourceTree = "<group>";
+		};
+		DCFF1B011A35A22B0068D740 /* data-structure */ = {
+			isa = PBXGroup;
+			children = (
+				DCFF1B021A35A2610068D740 /* NugStack.h */,
+				DCFF1B031A35A2610068D740 /* NugStack.m */,
+			);
+			path = "data-structure";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +252,7 @@
 			files = (
 				DCC050721A2C575600C3524F /* NugWeakProxy.m in Sources */,
 				DCC0506D1A2C56D100C3524F /* NugEvent.m in Sources */,
+				DCFF1B041A35A2610068D740 /* NugStack.m in Sources */,
 				DCC050081A24341000C3524F /* NugCollectionUpdates.m in Sources */,
 				DCC050031A2430FA00C3524F /* NugCollection.m in Sources */,
 			);
