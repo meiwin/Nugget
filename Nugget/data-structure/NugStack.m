@@ -64,7 +64,10 @@
 {
   return [_objects lastObject];
 }
-
+- (void)removeAllObjects
+{
+  [_objects removeAllObjects];
+}
 #pragma mark NSFastEnumeration
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id [])buffer count:(NSUInteger)len
 {

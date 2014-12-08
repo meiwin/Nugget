@@ -14,4 +14,5 @@
 - (void)pushObject:(id)object;
 - (id)popObject;
 - (id)peekObject;
+- (void)removeAllObjects;
 @end
