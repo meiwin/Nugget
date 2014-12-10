@@ -289,14 +289,15 @@
   
   NugCollectionUpdates * updates = [NugCollectionUpdates updates:0 from:col1 to:col2];
   NSSet * sectionExpected = [NSSet setWithArray:@[
-                                                  [NugCollectionUpdatesSectionMove moveFrom:2 to:0],
-                                                  [NugCollectionUpdatesSectionMove moveFrom:2 to:1]
+                                                  [NugCollectionUpdatesSectionMove moveFrom:2 to:0]
                                                   ]];
   XCTAssert([sectionExpected isEqual:[NSSet setWithArray:updates.sectionMoves]], @"should produce section moves");
   
   NSSet * rowExpected = [NSSet setWithArray:@[
                                               [NugCollectionUpdatesRowMove moveFrom:[NSIndexPath indexPathForRow:2 inSection:2]
-                                                                                 to:[NSIndexPath indexPathForRow:0 inSection:2]]
+                                                                                 to:[NSIndexPath indexPathForRow:0 inSection:2]],
+                                              [NugCollectionUpdatesRowMove moveFrom:[NSIndexPath indexPathForRow:2 inSection:2]
+                                                                                 to:[NSIndexPath indexPathForRow:1 inSection:2]],
                                               ]];
   XCTAssert([rowExpected isEqual:[NSSet setWithArray:updates.rowMoves]], @"should produce row moves");
 }

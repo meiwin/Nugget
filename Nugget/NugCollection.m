@@ -176,19 +176,19 @@
 // Moving data
 - (void)moveSectionFrom:(NSUInteger)from to:(NSUInteger)to
 {
-  id tmpFrom = _sectionArray[from];
-  _sectionArray[from] = _sectionArray[to];
-  _sectionArray[to] = tmpFrom;
+  id sectionData = _sectionArray[from];
+  id rowData = _dataArray[from];
   
-  tmpFrom = _dataArray[from];
-  _dataArray[from] = _dataArray[to];
-  _dataArray[to] = tmpFrom;
+  [self removeSectionAtIndex:from];
+  [self insertSection:sectionData atIndex:to];
+  [self addFromArray:rowData inSection:to];
 }
 - (void)moveRowFrom:(NSIndexPath *)from to:(NSIndexPath *)to
 {
   id tmpFrom = _dataArray[from.section][from.row];
-  _dataArray[from.section][from.row] = _dataArray[to.section][to.row];
-  _dataArray[to.section][to.row] = tmpFrom;
+  
+  [self removeRowAtIndexPath:from];
+  [self insertRow:tmpFrom atIndexPath:to];
 }
 
 // Update data
