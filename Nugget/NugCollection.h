@@ -40,6 +40,10 @@
 - (NSIndexPath *)removeRowAtIndexPath:(NSIndexPath *)indexPath;
 - (NSUInteger)removeSectionAtIndex:(NSUInteger)sectionIndex;
 
+// Moving data
+- (void)moveSectionFrom:(NSUInteger)from to:(NSUInteger)to;
+- (void)moveRowFrom:(NSIndexPath *)from to:(NSIndexPath *)to;
+
 // Enumerate
 - (void)enumerateItems:(void(^)(NSUInteger, NSUInteger, id, BOOL*))block;
 - (void)enumerateSections:(void(^)(NSUInteger, id, BOOL *))block;

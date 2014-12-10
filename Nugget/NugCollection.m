@@ -40,7 +40,17 @@
   }
   return self;
 }
-
+- (NSString *)description
+{
+  NSMutableString * str = [NSMutableString string];
+  [_sectionArray enumerateObjectsUsingBlock:^(id obj, NSUInteger section, BOOL *stop) {
+    [str appendString:[NSString stringWithFormat:@"(%@)\n", obj]];
+    [_dataArray[section] enumerateObjectsUsingBlock:^(id obj, NSUInteger row, BOOL *stop) {
+      [str appendString:[NSString stringWithFormat:@"  (%@)\n", _dataArray[section][row]]];
+    }];
+  }];
+  return str;
+}
 // Accessing data
 - (NSUInteger) numberOfSections;
 {
@@ -162,6 +172,25 @@
   }
   return ip;
 }
+
+// Moving data
+- (void)moveSectionFrom:(NSUInteger)from to:(NSUInteger)to
+{
+  id tmpFrom = _sectionArray[from];
+  _sectionArray[from] = _sectionArray[to];
+  _sectionArray[to] = tmpFrom;
+  
+  tmpFrom = _dataArray[from];
+  _dataArray[from] = _dataArray[to];
+  _dataArray[to] = tmpFrom;
+}
+- (void)moveRowFrom:(NSIndexPath *)from to:(NSIndexPath *)to
+{
+  id tmpFrom = _dataArray[from.section][from.row];
+  _dataArray[from.section][from.row] = _dataArray[to.section][to.row];
+  _dataArray[to.section][to.row] = tmpFrom;
+}
+
 // Update data
 - (NSUInteger)updateSection:(id)object atIndex:(NSUInteger)section;
 {

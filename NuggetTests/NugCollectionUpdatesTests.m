@@ -268,4 +268,36 @@
                                                        ]];
   XCTAssert([expectedInsertedRows isEqual:resultInsertedRows], @"should produce inserted rows");
 }
+- (void)testMoves
+{
+  NugCollection * col1 = [NugCollection createCollection];
+  NugCollection * col2 = [NugCollection createCollection];
+
+  [col1 addSection:@"two"];
+  [col1 addSection:@"three"];
+  [col1 addRow:@"one" inSection:1];
+  [col1 addRow:@"two" inSection:1];
+  [col1 addRow:@"three" inSection:1];
+  [col1 addSection:@"one"];
+  
+  [col2 addSection:@"one"];
+  [col2 addSection:@"two"];
+  [col2 addSection:@"three"];
+  [col2 addRow:@"three" inSection:2];
+  [col2 addRow:@"two" inSection:2];
+  [col2 addRow:@"one" inSection:2];
+  
+  NugCollectionUpdates * updates = [NugCollectionUpdates updates:0 from:col1 to:col2];
+  NSSet * sectionExpected = [NSSet setWithArray:@[
+                                                  [NugCollectionUpdatesSectionMove moveFrom:2 to:0],
+                                                  [NugCollectionUpdatesSectionMove moveFrom:2 to:1]
+                                                  ]];
+  XCTAssert([sectionExpected isEqual:[NSSet setWithArray:updates.sectionMoves]], @"should produce section moves");
+  
+  NSSet * rowExpected = [NSSet setWithArray:@[
+                                              [NugCollectionUpdatesRowMove moveFrom:[NSIndexPath indexPathForRow:2 inSection:2]
+                                                                                 to:[NSIndexPath indexPathForRow:0 inSection:2]]
+                                              ]];
+  XCTAssert([rowExpected isEqual:[NSSet setWithArray:updates.rowMoves]], @"should produce row moves");
+}
 @end

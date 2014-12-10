@@ -8,6 +8,59 @@
 
 #import "NugCollectionUpdates.h"
 
+#pragma mark -
+@implementation NugCollectionUpdatesSectionMove
+- (void)setFrom:(NSUInteger)from { _from = from; }
+- (void)setTo:(NSUInteger)to { _to = to; }
++ (instancetype)moveFrom:(NSUInteger)from to:(NSUInteger)to
+{
+  NugCollectionUpdatesSectionMove * o = [NugCollectionUpdatesSectionMove new];
+  o.from = from;
+  o.to = to;
+  return o;
+}
+- (NSUInteger)hash
+{
+  return [[NSString stringWithFormat:@"%ld-%ld", _from, _to] hash];
+}
+- (BOOL)isEqual:(id)object
+{
+  if ([object isKindOfClass:[NugCollectionUpdatesSectionMove class]])
+  {
+    NugCollectionUpdatesSectionMove * m = (NugCollectionUpdatesSectionMove *)object;
+    return m.from == self.from && m.to == self.to;
+  }
+  return NO;
+}
+@end
+
+#pragma mark -
+@implementation NugCollectionUpdatesRowMove
+- (void)setFrom:(NSIndexPath *)from { _from = from; }
+- (void)setTo:(NSIndexPath *)to { _to = to; }
++ (instancetype)moveFrom:(NSIndexPath *)from to:(NSIndexPath *)to
+{
+  NugCollectionUpdatesRowMove * o = [NugCollectionUpdatesRowMove new];
+  o.from = from;
+  o.to = to;
+  return o;
+}
+- (NSUInteger)hash
+{
+  return [[NSString stringWithFormat:@"%@-%@", _from, _to] hash];
+}
+- (BOOL)isEqual:(id)object
+{
+  if ([object isKindOfClass:[NugCollectionUpdatesRowMove class]])
+  {
+    NugCollectionUpdatesRowMove * m = (NugCollectionUpdatesRowMove *)object;
+    return [m.from isEqual:_from] && [m.to isEqual:_to];
+  }
+  return NO;
+}
+@end
+
+#pragma mark -
 @interface NugCollectionUpdates ()
 {
   NSArray * _indexPathsForInsertedRows;
@@ -56,6 +109,59 @@
 {
   _indexSetForInsertedSections = set;
 }
+- (void)setSectionMoves:(NSArray *)sectionMoves
+{
+  _sectionMoves = sectionMoves;
+}
+- (void)setRowMoves:(NSArray *)rowMoves
+{
+  _rowMoves = rowMoves;
+}
++ (NugCollection *)simulate:(NugCollection *)from
+                         to:(NugCollection *)to
+                    updates:(NugCollectionUpdates *)updates
+{
+  // calculate moves
+  NugCollection * sim = [from copy];
+  
+  // apply section deletes
+  if (updates.indexSetForDeletedSections.count > 0)
+  {
+    [updates.indexSetForDeletedSections enumerateIndexesWithOptions:NSEnumerationReverse usingBlock:^(NSUInteger idx, BOOL *stop) {
+      [sim removeSectionAtIndex:idx];
+    }];
+  }
+  
+  // apply row deletes
+  if (updates.indexPathsForDeletedRows.count > 0)
+  {
+    NSArray * reversed = [updates.indexPathsForDeletedRows sortedArrayUsingComparator:^NSComparisonResult(NSIndexPath * ip1, NSIndexPath * ip2) {
+      return [ip2 compare:ip1];
+    }];
+    [reversed enumerateObjectsUsingBlock:^(NSIndexPath * ip, NSUInteger idx, BOOL *stop) {
+      [sim removeRowAtIndexPath:ip];
+    }];
+  }
+  
+  // apply section inserts
+  if (updates.indexSetForInsertedSections)
+  {
+    [updates.indexSetForInsertedSections enumerateIndexesWithOptions:0 usingBlock:^(NSUInteger idx, BOOL *stop) {
+      [sim insertSection:[to objectForSectionAtIndex:idx] atIndex:idx];
+      [sim addFromArray:[to allRowObjectsAtIndex:idx] inSection:idx];
+    }];
+  }
+  
+  // apply row inserts
+  if (updates.indexPathsForInsertedRows)
+  {
+    [updates.indexPathsForInsertedRows enumerateObjectsUsingBlock:^(NSIndexPath * ip, NSUInteger idx, BOOL *stop) {
+      [sim insertRow:[to objectForRowAtIndexPath:ip] atIndexPath:ip];
+    }];
+  }
+  
+  return sim;
+}
 
 #pragma mark Public Methods
 + (NugCollectionUpdates *)empty
@@ -67,9 +173,10 @@
   });
   return _empty;
 }
+
 + (NugCollectionUpdates *)updates:(NugCollectionUpdatesOption)options
-                             from:(id)from
-                               to:(id)to
+                             from:(NugCollection *)from
+                               to:(NugCollection *)to
 {
   
   // compute deleted sections
@@ -126,18 +233,70 @@
     }
   }];
 
+  // calculate moves
+  
+  BOOL hasChanges = NO;
+  NugCollectionUpdates * updates = nil;
+  
   if (indexPathsForDeletedRows.count > 0
       || indexSetForDeletedSections.count > 0
       || indexPathsForInsertedRows.count > 0
       || indexSetForInsertedSections.count > 0)
   {
-    NugCollectionUpdates * updates = [[NugCollectionUpdates alloc] init];
+    hasChanges = YES;
+    updates = [[NugCollectionUpdates alloc] init];
     updates.indexPathsForDeletedRows = indexPathsForDeletedRows;
     updates.indexPathsForInsertedRows = indexPathsForInsertedRows;
     updates.indexSetForDeletedSections = indexSetForDeletedSections;
     updates.indexSetForInsertedSections = indexSetForInsertedSections;
-    return updates;
   }
-  return [self empty];
+  else
+  {
+    updates = [self empty];
+  }
+  
+  // apply the changes to `from` (simulation)
+  NugCollection * sim = from;
+  if (hasChanges)
+  {
+    sim = [self simulate:from to:to updates:updates];
+  }
+  
+  // now calculate movements
+  NSMutableArray * sectionMoves = [NSMutableArray array];
+  NSMutableArray * rowMoves = [NSMutableArray array];
+  for (NSInteger toSection = 0; toSection < to.numberOfSections; toSection++)
+  {
+    id sectionObj = [to objectForSectionAtIndex:toSection];
+    NSInteger fromSection = [sim indexForSection:sectionObj];
+    if (fromSection != toSection)
+    {
+      [sectionMoves addObject:[NugCollectionUpdatesSectionMove moveFrom:fromSection to:toSection]];
+      [sim moveSectionFrom:fromSection to:toSection];
+    }
+  }
+  
+  for (NSInteger section = 0; section < to.numberOfSections; section++)
+  {
+    for (NSInteger row = 0; row < [to numberOfRowsInSection:section]; row++)
+    {
+      NSIndexPath * toIP = [NSIndexPath indexPathForRow:row inSection:section];
+      id rowObject = [to objectForRowAtIndexPath:toIP];
+      NSIndexPath * fromIP = [sim indexPathForRow:rowObject];
+      if (![fromIP isEqual:toIP])
+      {
+        [rowMoves addObject:[NugCollectionUpdatesRowMove moveFrom:fromIP to:toIP]];
+        [sim moveRowFrom:fromIP to:toIP];
+      }
+    }
+  }
+  if (sectionMoves.count > 0 || rowMoves.count > 0)
+  {
+    if (updates == [self empty]) updates = [[NugCollectionUpdates alloc] init];
+    updates.sectionMoves = sectionMoves;
+    updates.rowMoves = rowMoves;
+  }
+  
+  return updates;
 }
 @end
