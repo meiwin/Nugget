@@ -139,7 +139,7 @@
       return [ip2 compare:ip1];
     }];
     [reversed enumerateObjectsUsingBlock:^(NSIndexPath * ip, NSUInteger idx, BOOL *stop) {
-      [sim removeRowAtIndexPath:ip];
+      if ([sim numberOfRowsInSection:ip.section] > ip.row) [sim removeRowAtIndexPath:ip];
     }];
   }
   
