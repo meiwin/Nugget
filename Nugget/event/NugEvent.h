@@ -45,4 +45,9 @@ extern NSString * NugEventInfoKey;
 - (void)unsubscribe:(id)target;
 - (void)unsubscribe:(id)target name:(NSString *)name;
 
+- (void)suspendEventsForThread:(NugEventThread)thread;
+- (void)suspendEventsForThreadName:(NSString *)threadName;
+- (void)resumeEventsForThread:(NugEventThread)thread;
+- (void)resumeEventsForThreadName:(NSString *)threadName;
+
 @end

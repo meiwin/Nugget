@@ -167,6 +167,8 @@ NSString * NugEventInfoKey = @"event_info";
   struct {
     int proxyDidBecomeInvalid;
   } _delegateFlags;
+  
+  BOOL _suspended;
 }
 @property (nonatomic, strong, readonly) NSThread * thread;
 @property (nonatomic, strong, readonly) NSMachPort * notificationPort;
@@ -174,6 +176,8 @@ NSString * NugEventInfoKey = @"event_info";
 @property (nonatomic, weak) id<EventInternalDelegate> delegate;
 - (instancetype)initWithThreadName:(NSString *)threadName;
 - (instancetype)initWithThread:(NSThread *)thread;
+- (void)suspend;
+- (void)resume;
 @end
 
 @implementation NugEventInternal
@@ -235,6 +239,10 @@ NSString * NugEventInfoKey = @"event_info";
 - (void)handleMachMessage:(void *)msg
 {
   [_notificationLock lock];
+  if (_suspended) {
+    [_notificationLock unlock];
+    return;
+  }
   NSDictionary * subscribers = [_subscribers copy];
   NSSet * subscribersWithPendingNotifications = [_subscriberIdsWithPendingNotifications copy];
   [_subscriberIdsWithPendingNotifications removeAllObjects];
@@ -264,6 +272,26 @@ NSString * NugEventInfoKey = @"event_info";
                          components:nil
                                from:nil
                            reserved:0];
+}
+- (void)suspend
+{
+  [_notificationLock lock];
+  _suspended = YES;
+  [_notificationLock unlock];
+}
+- (void)resume
+{
+  [_notificationLock lock];
+  BOOL wasSuspended = _suspended;
+  _suspended = NO;
+  [_notificationLock unlock];
+  
+  if (wasSuspended) {
+    [_notificationPort sendBeforeDate:[NSDate date]
+                           components:nil
+                                 from:nil
+                             reserved:0];
+  }
 }
 @end
 
@@ -475,4 +503,47 @@ NSString * NugEventInfoKey = @"event_info";
   [_proxies removeObject:proxy];
   [_lock unlock];
 }
+
+#pragma mark Suspend
+- (void)suspendEventsForThread:(NugEventThread)thread
+{
+  NSAssert(thread != NugEventThreadCurrent, @"Suspending current thread not supported.");
+  
+  NugEventInternal * internal = nil;
+  if (thread == NugEventThreadBackground) {
+    internal = [[NugEventRegistry sharedInstance] eventInternalNamed:@"com.pie.eventInternal.background"];
+  }
+  else if (thread == NugEventThreadMain) {
+    internal = [self eventInternalForMainThread];
+  }
+  
+  [internal suspend];
+}
+- (void)suspendEventsForThreadName:(NSString *)threadName
+{
+  NSParameterAssert(threadName);
+  NugEventInternal * internal = [[NugEventRegistry sharedInstance] eventInternalNamed:threadName];
+  [internal suspend];
+}
+- (void)resumeEventsForThread:(NugEventThread)thread
+{
+  NSAssert(thread != NugEventThreadCurrent, @"Suspending current thread not supported.");
+  
+  NugEventInternal * internal = nil;
+  if (thread == NugEventThreadBackground) {
+    internal = [[NugEventRegistry sharedInstance] eventInternalNamed:@"com.pie.eventInternal.background"];
+  }
+  else if (thread == NugEventThreadMain) {
+    internal = [self eventInternalForMainThread];
+  }
+  
+  [internal resume];
+}
+- (void)resumeEventsForThreadName:(NSString *)threadName
+{
+  NSParameterAssert(threadName);
+  NugEventInternal * internal = [[NugEventRegistry sharedInstance] eventInternalNamed:threadName];
+  [internal resume];
+}
+
 @end
