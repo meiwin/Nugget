@@ -67,6 +67,9 @@ NSString * NugEventInfoKey = @"event_info";
   }
   return self;
 }
+- (void)dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)processNotifications
 {
   [_lock lock];
@@ -359,6 +362,9 @@ NSString * NugEventInfoKey = @"event_info";
   }
   return self;
 }
+- (void)dealloc {
+  [self unsubscribeAll];
+}
 + (instancetype)defaultEvent
 {
   static NugEvent * _defaultEvent;
@@ -486,6 +492,15 @@ NSString * NugEventInfoKey = @"event_info";
   [_proxies removeObjectsInArray:proxiesToRemove];
   [_lock unlock];
 }
+- (void)unsubscribeAll {
+  [_lock lock];
+  [_proxies enumerateObjectsUsingBlock:^(NugEventSubscriberProxy * proxy, NSUInteger idx, BOOL *stop) {
+    [[NSNotificationCenter defaultCenter] removeObserver:proxy];
+  }];
+  [_proxies removeAllObjects];
+  [_lock unlock];
+}
+
 #pragma mark EventSubscriberProxyDelegate
 - (void)eventSubscriberProxyDidBecomeInvalid:(NugEventSubscriberProxy *)proxy
 {
