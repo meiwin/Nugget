@@ -81,7 +81,7 @@
   NSUInteger section = 0;
   NSUInteger idx = NSNotFound;
   if (object) {
-    for (NSArray * arr in _dataArray) {
+    for (NSArray * arr in [_dataArray copy]) {
       idx = [arr indexOfObject:object];
       if (idx != NSNotFound) break;
       section++;
@@ -97,7 +97,7 @@
 }
 - (BOOL)isEmpty;
 {
-  for (NSArray * rows in _dataArray) {
+  for (NSArray * rows in [_dataArray copy]) {
     if ([rows count] > 0) return NO;
   }
   return YES;
@@ -218,12 +218,12 @@
 {
   BOOL keepGoing = YES;
   NSUInteger section = 0;
-  for (NSArray *rows in _dataArray)
+  for (NSArray *rows in [_dataArray copy])
   {
     if (!keepGoing) break;
     
     NSUInteger row = 0;
-    for (id obj in rows)
+    for (id obj in [rows copy])
     {
       if (!keepGoing) break;
       BOOL stop = NO;
@@ -238,7 +238,7 @@
 {
   BOOL keepGoing = YES;
   NSUInteger section = 0;
-  for (id sectionItem in _sectionArray)
+  for (id sectionItem in [_sectionArray copy])
   {
     if (!keepGoing) break;
     
