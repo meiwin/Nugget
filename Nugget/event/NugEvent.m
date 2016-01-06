@@ -176,11 +176,13 @@ NSString * NugEventInfoKey = @"event_info";
 @property (nonatomic, strong, readonly) NSThread * thread;
 @property (nonatomic, strong, readonly) NSMachPort * notificationPort;
 @property (nonatomic, strong, readonly) NSLock * notificationLock;
+@property (nonatomic, strong, readonly) NSRunLoop * runLoop;
 @property (nonatomic, weak) id<EventInternalDelegate> delegate;
 - (instancetype)initWithThreadName:(NSString *)threadName;
 - (instancetype)initWithThread:(NSThread *)thread;
 - (void)suspend;
 - (void)resume;
+- (void)cancel;
 @end
 
 @implementation NugEventInternal
@@ -225,8 +227,20 @@ NSString * NugEventInfoKey = @"event_info";
   {
     [runLoop run];
   }
+  _runLoop = runLoop;
 }
+- (void)cancel {
+  _notificationPort.delegate = nil;
+  [_runLoop removePort:_notificationPort forMode:NSRunLoopCommonModes];
+  if (_runLoop != [NSRunLoop mainRunLoop]) {
+    CFRunLoopStop([_runLoop getCFRunLoop]);
+  }
+  [_thread cancel];
 
+  _notificationPort = nil;
+  _thread = nil;
+  _runLoop = nil;
+}
 #pragma mark Delegate
 - (void)setDelegate:(id<EventInternalDelegate>)delegate
 {
@@ -305,18 +319,27 @@ NSString * NugEventInfoKey = @"event_info";
   NSMutableDictionary * _registries;
 }
 + (instancetype)sharedInstance;
++ (void)resetSharedInstance;
 - (NugEventInternal *)eventInternalNamed:(NSString *)name;
 @end
 
 @implementation NugEventRegistry
+
+static NugEventRegistry * _sharedRegistry;
+static dispatch_once_t * _onceTokenRef;
 + (instancetype)sharedInstance
 {
-  static NugEventRegistry * _sharedRegistry;
   static dispatch_once_t onceToken;
+  _onceTokenRef = &onceToken;
+  
   dispatch_once(&onceToken, ^{
     _sharedRegistry = [[NugEventRegistry alloc] init];
   });
   return _sharedRegistry;
+}
++ (void)resetSharedInstance {
+  _sharedRegistry = nil;
+  *_onceTokenRef = 0;
 }
 - (instancetype)init
 {
@@ -327,6 +350,12 @@ NSString * NugEventInfoKey = @"event_info";
     _registries = [NSMutableDictionary dictionaryWithCapacity:5];
   }
   return self;
+}
+- (void)dealloc {
+  for (NugEventInternal * o in [_registries allValues]) {
+    [o cancel];
+  }
+  _registries = nil;
 }
 - (NugEventInternal *)eventInternalNamed:(NSString *)name
 {
@@ -561,4 +590,9 @@ NSString * NugEventInfoKey = @"event_info";
   [internal resume];
 }
 
+#pragma mark Reset
+- (void)reset {
+  [self unsubscribeAll];
+  [NugEventRegistry resetSharedInstance];
+}
 @end

@@ -50,4 +50,5 @@ extern NSString * NugEventInfoKey;
 - (void)resumeEventsForThread:(NugEventThread)thread;
 - (void)resumeEventsForThreadName:(NSString *)threadName;
 
+- (void)reset;
 @end
